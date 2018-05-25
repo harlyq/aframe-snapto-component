@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
+    <!--script src="https://unpkg.com/aframe-snapto-component/dist/aframe-snapto-component.min.js"></script-->
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: black">
+      <a-camera position="0 0 15"></a-camera>
+      <a-light position="10 10 10"></a-light>
+      <a-light type="ambient" color="#222"></a-light>
+      <a-box color="brown" position="-20 13 9" rotation="0 20 0" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: -1; dur: 5000" snapto="offset: 0 0.5 0; type: hitnormal; direction: 15 -13 -4; continuous: true"></a-box>
+      <a-box color="blue" position="10 400 -3" rotation="80 -20 170" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: -1; dur: 5000" snapto="offset: 0 0.5 0; type: hitnormal; objects: a-plane; continuous: true"></a-box>
+      <a-box color="red" position="0 13 -9" snapto="offset: 0 0.5 0; type: hitnormal"></a-box>
+      <a-box color="orange" position="-2 25 -8" rotation="20 40 -30" snapto="offset: 0 0.5 0; type: hitnormal; continuous: true"></a-box>
+      <a-box color="yellow" position="-2 60 -10" snapto="offset: 0 0.5 0; continuous: falses"></a-box>
+      <a-box color="white" position="1 10 -6" animation="property: position; from: 1 9.9 -6; to: 1 -9.9 -6; loop: -1; dir: alternate; dur: 10000" snapto="offset: 0 0.5 0; type: gridsnap; continuous: true"></a-box>
+      <a-box color="grey" position="4 24 2" snapto="offset: 0 0.5 0; type: hitnormal"></a-box>
+      <a-box color="green" position="2 800 -8" snapto="offset: 0 0.5 0"></a-box>
+      <a-entity rotation="0 -30 0" position="0 0 -10" animation="property: position; from: 0 -2 -10; to: 0 2 -10; loop: -1; dir: alternate; dur: 5000">
+          <a-plane color="yellow" position="0 1 0" material="side: double" rotation="-50 0 0" scale="10 10 10" opacity="0.5"></a-plane>
+      </a-entity>
+      <a-entity rotation="0 -10 0" position="8 4 -4">
+          <a-plane color="white" position="0 1 0" material="_side: double" rotation="-20 0 0" scale="10 10 10" opacity="0.5"></a-plane>
+      </a-entity>
+      <a-sphere radius="2" position="-5 0 5" color="purple" opacity="0.5"></a-sphere>
+    </a-scene>
+  </body>
+</html>
