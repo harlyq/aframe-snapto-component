@@ -132,9 +132,10 @@ AFRAME.registerComponent("snapto", {
 
   init: function () {
     this.snapTo = this.snapTo.bind(this)
-    this.objects = []
+    this.objects = [] // cache the ground elements
     this.objectsNeedUpdate = true
     this.raycaster = new THREE.Raycaster()
+    this.lastRotation = new THREE.Quaternion()
     this.origin = new THREE.Vector3().copy(this.el.object3D.position)
 
     // we only set up a tick if we need it
@@ -189,10 +190,7 @@ AFRAME.registerComponent("snapto", {
     let point = new THREE.Vector3()
     let dir = new THREE.Vector3()
     let start = new THREE.Vector3()
-    let normalEuler = new THREE.Euler()
-    let objectEuler = new THREE.Euler()
     let intersections = []
-    let objects = []
 
     return function() {
       const data = this.data
@@ -234,17 +232,18 @@ AFRAME.registerComponent("snapto", {
           firstHit.object.getWorldQuaternion(faceWorldRotation)
           worldNormal.copy(firstHit.face.normal).applyQuaternion(faceWorldRotation).normalize()
 
-          // worldNormal will represent the new Y axis for the object, but we want to keep any 
-          // local rotations from the object about the Y axis
+          // worldNormal will represent the new Y axis for the object
           rotation.setFromUnitVectors(UP, worldNormal)
-          normalEuler.setFromQuaternion(rotation, "XZY") // Y must be last, least important for the worldNormal (world rotations)
-          objectEuler.copy(object3D.rotation).reorder("YXZ") // Y must be first, most important for the object (local rotations)
-          normalEuler.y = -objectEuler.y // keep object rotations about Y
-          rotation.setFromEuler(normalEuler)
 
+          // if another system has rotated the object since last time, then re-apply the rotates
+          if (!object3D.quaternion.equals(this.lastRotation)) {
+            rotation.multiply(object3D.quaternion)
+          }
+          
           point.copy(data.offset).applyQuaternion(rotation).add(firstHit.point)
           object3D.position.set(point.x, point.y, point.z)
           object3D.setRotationFromQuaternion(rotation)
+          this.lastRotation.copy(object3D.quaternion)
         } else {
           // align the position of the object to the hit position
           point.copy(data.offset).add(firstHit.point)
