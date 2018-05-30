@@ -1,130 +1,49 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./index.js");
-/******/ })
-/************************************************************************/
-/******/ ({
-
-/***/ "./index.js":
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-if (!THREE) console.error(`requires three.js`)
-if (!AFRAME) console.error(`requires aframe.io`)
+// copyright 2018 harlyq, ISC license
 
 AFRAME.registerComponent("snapto", {
   schema: {
     type: {
       default: "hitposition",
       oneof: "hitposition, hitnormal, gridsnap",
-      description: "align the object to either the position of the hit pointing UP (hitposition), to the hit position with the up in the direction of the normal (hitnormal), or grid position (gridsnap)",
+      /*#if dev*/description: "align the object to either the position of the hit pointing UP (hitposition), to the hit position with the up in the direction of the normal (hitnormal), or grid position (gridsnap)",/*#endif*/
       parse: x => x.toLowerCase(),
     },
   
     offset: {
       type: "vec3",
-      description: "offset (in local coordinates) to apply to the node after it has been snapped into place",
+      /*#if dev*/description: "offset (in local coordinates) to apply to the node after it has been snapped into place",/*#endif*/
     },
   
     grid: {
       type: "vec3",
       default: {x: 1, y: 1, z: 1},
       if: {type: ["gridsnap"]},
-      description: "grid spacing, centered on 0,0,0"
+      /*#if dev*/description: "grid spacing, centered on 0,0,0",/*#endif*/
     },
   
     objects: {
       default: "*",
       //type: "selectorAll", this pulls in everything in the current document, but we just want to check children of the current scene
       if: {type: ["hitposition", "hitnormal"]},
-      description: "selector for determining which objects for the raycast, by default checks against all other objects in the scene",
+      /*#if dev*/description: "selector for determining which objects for the raycast, by default checks against all other objects in the scene",/*#endif*/
     },
   
     rayStart: {
       default: 0,
       if: {type: ["hitposition", "hitnormal"]},
-      description: "start point along the 'direction' for the ray from the entities origin, can use -ve values to start behind the entity",
+      /*#if dev*/description: "start point along the 'direction' for the ray from the entities origin, can use -ve values to start behind the entity",/*#endif*/
     },
   
     direction: {
       type: "vec3",
       default: {x: 0, y: -1, z: 0},
       if: {type: ["hitposition", "hitnormal"]},
-      description: "world direction of the ray for the snap test",
+      /*#if dev*/description: "world direction of the ray for the snap test",/*#endif*/
     },
 
     continuous: {
       default: false,
-      description: "if true, perform the snap every frame, good for moving objects, but computationally expensive (cannot be changed at runtime)"
+      /*#if dev*/description: "if true, perform the snap every frame, good for moving objects, but computationally expensive (cannot be changed at runtime)",/*#endif*/
     }
   },
   
@@ -254,8 +173,3 @@ AFRAME.registerComponent("snapto", {
   })(),
 })
 
-
-
-/***/ })
-
-/******/ });

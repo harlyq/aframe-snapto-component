@@ -1,35 +1,26 @@
 {
   "name": "aframe-snapto-component",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "aframe component to snap this entity to another entity",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "webpack --mode=development --devtool= index.js -o dist/aframe-snapto-component.js & webpack -p index.js -o dist/aframe-snapto-component.min.js",
-    "version": "npm run dist && git add -A dist"
-  },
+  "files": [
+    "aframe-snapto-component.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/harlyq/aframe-snapto-component.git"
   },
   "author": "harlyq",
-  "license": "MIT",
+  "license": "ISC",
   "keywords": [
     "a-frame",
     "aframe",
     "aframe-vr",
-    "aframe-component",
-    "aframe-components"
+    "aframe-component"
   ],
   "bugs": {
     "url": "https://github.com/harlyq/aframe-snapto-component/issues"
   },
   "homepage": "https://github.com/harlyq/aframe-snapto-component#readme",
-  "devDependencies": {
-    "cp-cli": "^1.1.2",
-    "webpack": "^4.8.1",
-    "webpack-cli": "^2.1.3"
-  },
   "peerDependencies": {
     "aframe": "^0.8.0"
   }

@@ -15,7 +15,7 @@ When snapping with **hitnormal**, the default y-axis is aligned to the ground no
 ```html
 <head>
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-  <script src="https://unpkg.com/aframe-snapto-component/dist/aframe-snapto-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-snapto-component/dist/aframe-snapto-component.js"></script>
 </head>
 <body>
   <a-box snapto="type: hitnormal; offset: 0 0.5 0;"></a-box>
